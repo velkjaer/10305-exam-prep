@@ -1,0 +1,253 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{physics}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\title{Advanced solid state physics exam}
+\author{Rasmus Hansen, Asbjørn Moltke and Victor Elkjaer}
+\date{May 2018}
+
+\begin{document}
+\maketitle
+
+\section{Static and dynamic screening in metals}
+Consider an external field. From linear response the material responds at the same frequency, giving an induced density
+\begin{equation}
+    n_{ind}(r) = -q u_{tot} = -q(A_{tot}e^{iqr}+C.C)
+\end{equation}
+The internal field is the total minus the induced, giving a dielectric function given by
+\begin{equation}
+    \varepsilon = \frac{q^2}{q^2+\rho(E_F)}
+\end{equation}
+Inserting this in the point charge potential in Fourier space $1/r = \int 1/q^2 \exp(i\mathbf{q} \cdot \mathbf{r}) \mathrm{d} \mathbf{q}$ gives screened potential
+\begin{equation}
+   U= \frac{1}{r} \exp(- k_{TF} r)
+\end{equation}
+$k_{TF} \approx 0.5 Å$. This model has problems. Induced charge diverges at zero, and no Friedel oscillations. Instead turn to quantum mechanical expression.
+\begin{equation}
+    \varepsilon = 1 + \frac{8 \pi}{q^2 V} \sum_{\alpha \beta} \frac{\abs{\mel{\alpha}{e^{i\mathbf{q} \cdot \mathbf{r}}}{\beta}}^2}{E_{\beta}-E_{\alpha}-\omega - i \eta}(f_{\alpha}-f_{\beta})
+\end{equation}
+Assume jellium/free electron gas and plug in plane waves. In the static limit this leads to Lindhart
+\begin{equation}
+    \varepsilon(\omega=0,q) = 1 + \frac{k_{TF}}{q^2}F(q/2k_{TF})
+\end{equation}
+
+The induced charge can in general be found as
+\begin{equation}
+    \rho_{ind}(\mathbf{r}) = Z e \frac{1}{(2 \pi)^3} \int \left[ \frac{1}{\varepsilon(q)}-1 \right] e^{i \mathbf{q} \cdot \mathbf{r}} \mathrm{d} \mathbf{q}
+\end{equation}
+This leads to two finite induced charge and Friedel.
+
+
+
+\newpage
+\section{Plasmons}
+\subsection{Plasmon relation to dielectric function}
+Plasmons are clearly seen to exist when the dielectric function (of $\omega$) goes to zero $\rightarrow$ induces a finite total field regardless of the size of the external.
+\begin{equation}
+    v_{tot}(r,\omega) = \int\epsilon^{-1}(r,r',\omega)v_{ext}(r',\omega)\mathrm{d}r'
+\end{equation}
+Single e-h excitations vs. collective excitation (Sketch tangent function)\\
+Equation of motion technique:
+\begin{equation}
+    [\hat{S}_i,\hat{H}] = (E_i - E_0)\hat{S}_i \quad, \; \hat{S}(q) = \dfrac{1}{\sqrt{N}}\sum_{k}\phi_k(q)\hat{S}_k(q)
+\end{equation}
+
+RPA $\rightarrow$ a maximum of one excitation per excited state.\\
+Landau damping, sketch for simple metals.
+\subsection{Plasmon energy dispersion}
+Starting from the Lindhart dielectric function. Upon solving and Taylor expanding, it is obtained
+\begin{equation}
+    \varepsilon(q \rightarrow 0,\omega) = 1 - \frac{\omega_p^2}{(\omega + i \eta)^2} - \frac{3}{5} \frac{\omega_p^2}{(\omega+i\eta)^2}v_F^2 q^2
+\end{equation}
+\begin{equation}
+    \omega_{pl}(q) = \omega_p\left(1 + \dfrac{3 v_f^2q^2}{10\omega_p^2} + \ldots\right)
+\end{equation}
+
+\subsection{Surface plasmon-polaritons}
+\textbf{Qualitative features:} couples with light. Is not self-sustained. Requires momentum transfer from e.g. umklapp.\\ \textbf{Thin films:} Plasmon-polaritons at both surfaces.
+
+
+\newpage
+\section{Linear Reponse}
+\subsection{Kubo formula}
+Small perturbation $\Rightarrow$ linear response
+Interaction picture, where time evolution of operators is in Heisenberg
+\begin{equation}
+    \hat{A}_{H_0}(t) = e^{i \hat{H_0} t} \hat{A}(t) e^{-i \hat{H_0} t}
+\end{equation}
+While the time dependence of due to the perturbation is carried in the wave functions in the Scrödinger picture
+\begin{equation}
+    \ket{\psi(t)} = U_I \ket{\psi(t_0)}, \quad U_I(t,t_0) = e^{i \hat{H_0} t} U e^{-i \hat{H_0} t_0}
+\end{equation}
+Inserting in Schrödinger one can obtain, after taylor expanding to first order, and moving to non interacting picture $\hat{U} \approx \hat{T}(1-i\int_{t_0}^0 \hat{V}_{\hat{H}_0}(t')\mathrm{d}t') e^{i \hat{H}_0 t_0}$. \\
+A change in the expectation value of any time independent (assumption) observable to first order is
+\begin{equation}
+    \delta \hat{A} = \mel{0}{\hat{A}}{0} - \mel{0}{U^{\dagger}(0)\hat{A}U(0)}{0}
+\end{equation}
+Leading to Kubo formula
+\begin{equation}
+    \delta A(t=0) = -i \int_{t_0}^{\infty} \theta(-t') \mel{0}{\comm{\hat{A}_{\hat{H}_0}(0)}{\hat{V}_{\hat{H}_0}(t')}}{0} \mathrm{d} t'
+\end{equation}
+\subsection{time varying pertubation}
+Assuming $\hat{V}(t) = e^{-i(\omega + i \eta)t} \hat{V}$, one can obtain
+\begin{equation}
+    \delta A(\omega + i \eta) = \sum_s \frac{\mel{0}{\hat{A}}{s} \mel{s}{\hat{V}}{0}}{\omega - \omega_{s0} + \i \eta} -  \frac{\mel{0}{\hat{V}}{s} \mel{s}{\hat{A}}{0}}{\omega + \omega_{s0} + \i \eta}
+\end{equation}
+\subsection{Non interacting Density-density response}
+Important case, related to the dielectric function. The observable is now the density $\hat{A} = \hat{n}(r)$, and the perturbation is still adiabatic and time varying, and given additionally given by $\hat{V} = \int V(r) \hat{n}(r) \mathrm{d}r$. 
+\begin{equation}
+    \delta n(r, \omega) = \int \chi(r,r',\omega) V(r') \mathrm{d}r'
+\end{equation}
+Where
+\begin{equation}
+    \chi(r,r',\omega) = \sum_s \frac{\mel{0}{\hat{n}(r)}{s} \mel{s}{\hat{n}(r')}{0} }{\omega - \omega_{s0} + \i \eta} - \frac{\mel{0}{\hat{n}(r)}{s} \mel{s}{\hat{n}(r')}{0}}{\omega + \omega_{s0} + \i \eta}
+\end{equation}
+
+Non-interacting means we can introduce the density operator $\hat{n}(r) =  \sum_i \phi_i^* \phi_i \hat{c}^{\dagger}_i \hat{c}_i$
+
+Arrive at:
+\begin{equation}
+    \chi(r,r',\omega) = \sum_{ik} (f_i-f_j)\dfrac{\psi_i(r)^{*}\psi_j(r)\psi_i(r')\psi_j(r')^{*}}{\omega-(\varepsilon_j-\varepsilon_i)+i\eta}
+\end{equation}
+
+
+
+\newpage
+\section{Density response function}
+The change in the total potential can be given in two ways
+\begin{equation}\label{eq:density_response_dielectric}
+    \delta v_{tot}(r,\omega) = v_{ext}(r,\omega) + \int \frac{\delta n(r_1,\omega)}{\abs{r-r_1}} \mathrm{d}r_1 = \int \varepsilon^{-1} v_{ext}(r_1,\omega) \mathrm{d}r_1
+\end{equation}
+This defines the dielectric function. Take the functional derivative with $v_{ext}(r',\omega)$. The definition of the density-density response function is
+\begin{equation}
+    \chi(r_1,r',\omega) = \frac{\delta n(r_1,\omega)}{\delta v_{ext} (r',\omega)}
+\end{equation}
+Providing
+\begin{equation}
+    \varepsilon^{-1}(r,r',\omega) = \delta(r-r') + \int \frac{1}{\abs{r-r_1}} \chi(r_1,r',\omega) \mathrm{d}r_1
+\end{equation}
+
+\subsection{Dielectric function within RPA}
+Again, start from \eqref{eq:density_response_dielectric} take functional derivative with respect to $v_{ext}$\\
+Use
+\begin{equation}
+    \delta v_{tot} = \delta v_{ext} + \int \dfrac{n(r',\omega)}{\abs{r-r'}}\mathrm{d}r \; \Rightarrow \; \dfrac{\delta v_{ext}}{\delta v_{tot}} = \delta(r-r') - \int \dfrac{\delta n(r_1,\omega)}{\delta v_{tot}(r)}\dfrac{1}{\abs{r-r_1}}\mathrm{d}r_1
+\end{equation}
+This is equal to $\epsilon(r,r',\omega)$. Identify $\chi^{0}(r_1,r',\omega)$.
+
+
+\subsection{Local Field effects}
+Go from
+\begin{equation}
+    \epsilon(r,r',\omega) \quad (\mathrm{FT})\Rightarrow \quad \epsilon_{G,G'}(q,\omega)
+\end{equation}
+Talk about macroscopic dielectric constant: \textbf{Think of discrete dielectric function (Matrix)}
+\begin{equation}
+    \mathrm{RIGHT:} \;\epsilon_{M}(\omega) = \lim_{q\rightarrow 0}\dfrac{1}{\epsilon^{-1}_{00}(q,\omega)} \quad ,\mathrm{Wrong:} \; \epsilon_{M} = \lim_{q\rightarrow0}\epsilon_{00}(q,\omega)
+\end{equation}
+
+\newpage
+\section{Excitons}
+\subsection{Joint density of states and interband transitions}
+\begin{itemize}
+    \item Difference from plasmons (Plasmon at higher energies, Exciton lowers energy).
+    \item Semiconductors and insulators, interband transitions, BSE not RPA. exchange (requires overlap) vs. Coulomb ("requires" not too much screening).
+    \item Difference from trivial excitations (Bound state).
+    \item Joint density of states and critical points
+\end{itemize}
+  
+
+\begin{equation}
+    \text{Critical Points at: } \nabla_k \qty(E_{ck} - E_{vk}) = 0
+\end{equation}
+\subsection{Two models: Simple two band and screened hydrogen model}
+Simple two band model, tight binding, localised orbitals.
+\begin{equation}
+    States: \ket{\Phi_{n,q=0}} = \dfrac{1}{\sqrt{N}}\sum_{m=0}^{N-1}b_{n+m,c}^{\dagger}b_{m,v}
+    ^{\dagger}\ket{\Psi_0}
+\end{equation}
+\begin{equation}
+    H_0 = E_0 -\left(\sum \varepsilon_v b^{\dagger}_{nv}b_{nv} + t(b^{\dagger}_{nv}b_{n+1,v} + b^{\dagger}_{nv}b_{n-1,v}) - electron\right)
+\end{equation}
+\begin{equation}
+    H_{int} = - \sum_{m,m}^{N-1}\dfrac{U}{1+\abs{n-m}}b^{\dagger}_{nv}b_{nv}b^{\dagger}_{mv}b_{mv}
+\end{equation}
+Solve: $\mathbf{H}\mathbf{F}_i = E_i \mathbf{F}_i$.\\
+The screened hydrogen model takes its offset in an expansion of single particle excitation functions.
+\begin{equation}
+    \Psi_{ex} = \sum_k A(k) \Phi_{c \mathbf{k}+\mathbf{k}_{ex},vk}
+\end{equation}
+Using the vanishing momentum of light at optical frequencies, and assuming a two band parabolic model. One can obtain a hydrogen like equation for the envelope function
+\begin{equation}
+    F(\mathbf{r}) = \frac{1}{\sqrt{V}} \sum_{\mathbf{k}} A(\mathbf{k}) e^{i \mathbf{k} \cdot \mathbf{r}}
+\end{equation}
+Where $\mathbf{r}$ describes the distance between electron and hole.
+The hydrogen like equation:
+\begin{equation}
+    \qty[-\frac{\hbar^2 \nabla^2}{2 \mu_{ex}}-\frac{e^2}{\varepsilon r}] F(\mathbf{r}) = (E-E_G)F(\mathbf{r})
+\end{equation}
+where $F\qty(r)$ denotes the envelope function which physical meaning represents the position of the electron, given the hole is at the origin ($r=0)$. Typical exciton binding energies are meV for typical semiconductors, and eV for strong insulators.
+
+\subsection{Role of the effective exciton mass:}
+\textbf{Flat bands} result in a high exciton mass and a localised exciton whereas \textbf{dispersive bands} result in small exciton mass and a delocalised exciton. The exciton mass is given as $\mu_{\mathrm{ex}}^{-1} = m_{\mathrm{e}}^{-1} + m_{\mathrm{h}}^{-1}$. Recall that the inverse of the effective electron and hole masses can be calculated as the curvature of the bands at $k=0$ for the conduction and valence band (electrons and holes respectively).
+
+\newpage
+\section{Green functions and quasiparticles}
+\begin{itemize}
+    \item What is a quasiparticles?
+    \item What is a Green function? 
+    \begin{equation}
+        G(x,x') = - \theta(t-t') \mel{N}{\acomm{\Psi(x)}{\Psi^{\dagger}(x')}}{N}, \quad \Psi(x) = e^{-i H t} \Psi(r) e^{i H t}
+    \end{equation}
+    \item Fourier transforming the Greens function leads to
+\begin{equation}
+    G(r,r';\omega) = \sum_i \dfrac{\Psi_{i+}^{QP}(r)\Psi_{i+}^{QP}(r')^{*}}{\omega - \varepsilon_{i+}^{QP} + i\eta} + \sum_i \dfrac{\Psi_{i-}^{QP}(r)\Psi_{i-}^{QP}(r')^{*}}{\omega - \varepsilon_{i-}^{QP} + i\eta}
+\end{equation}
+$\Psi_{i+}^{QP}(r)$ are quasiparticle wavefunctions.
+\item Spectral properties: spectral function imaginary part of Green's functions
+\item Projected Green's function $G_{aa}(\omega) = G^{0}_{aa}(\omega) + G^{0}_{aa}(\omega)\sum_{k}V_{ak}G_{ak}(\omega)$
+\begin{equation}
+    [(\omega + i\eta)I -H_0]G^{0}(\omega) = I \quad, [(\omega + i\eta)I -H]G(\omega) = I
+\end{equation}
+\item The Self-Energy: From Newns-Anderson set or from the Green's function note using the EOM technique.
+    \item Quasi-particle eigenvalue equation. At $\omega = \varepsilon_i^{QP}$ the LHS of \eqref{eq:QPEQ} diverges and hence the nominator must vanish.
+\begin{equation}\label{eq:QPEQ}
+    \sum_{i} \dfrac{\qty[\qty(\omega + i \eta) I - H^{0} - \Sigma\qty(t)] \ket{\Psi_i^{QP}}\bra{\Psi_i^{QP}}}{\omega - \varepsilon_i^{QP} + i \eta} = I 
+\end{equation}
+\item Self energy and approximations: \textbf{Wideband, Narrowband, (Elliptic)}.
+\item Self energy changes from screening: Image charge.
+\end{itemize}
+
+
+
+
+\newpage
+\section{Berry phase}
+\begin{itemize}
+    \item Parametric Hamiltonian
+    \item Adiabatic limit
+    \item Eigenstates (of any Hamiltonian) defined down to a gauge transformation.
+    \item Finding the phase difference going from $R$ to $R+\mathrm{d}l$ is after linearisation
+\begin{equation}
+        \mathrm{d} \phi = i \braket{\psi_m(R)}{\pdv{R}\psi_m(R)} \cdot \mathrm{d}l
+\end{equation}
+
+\item This is the Berry connection.
+\item Berry phase
+\begin{equation}
+    \gamma_n \qty(C) = i \oint_C \ip{n\qty(\vec{R})}{\nabla_{\vec{R}} n\qty(\vec{R})} \cdot \mathrm{d}\vec{R}
+\end{equation}
+\item Berry curvature
+\begin{equation}
+    \gamma_n = - \int \int_C \mathrm{d}\vec{S} \cdot \vec{B}_n\qty(\vec{R})
+\end{equation}
+\begin{equation}
+    \vec{B}_n\qty(\vec{R}) = - \Im \sum_{m \neq m} \dfrac{\mel{n\qty(\vec{R})}{\nabla_{\vec{R}} \hat{H}\qty(\vec{R})}{m\qty(\vec{R})} \times \mel{m\qty(\vec{R})}{\nabla_{\vec{R}}H\qty(\vec{R})}{n\qty(\vec{R})}}{\qty(E_m\qty(\vec{R}) - E_n\qty(\vec{R}))^2}
+\end{equation}
+\item Connection to Aharanov-Bohm.
+Make drawing
+\item Barry Phase in solids: Chern number, Gauge patching.
+\item Other topics: 
+\end{itemize}
+\end{document}
